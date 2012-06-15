@@ -71,11 +71,13 @@
 
 
 @implementation IFVerticallyExpandingTextField
+@synthesize minTextFieldHeight;
 
 - (void) awakeFromNib {
 	superviewsExpandOnGrowth = YES;
 	viewMaskPairs = [[NSMutableArray alloc] init];
-	
+	minTextFieldHeight = 0;
+    
 	if ([self autoresizingMask] & NSViewHeightSizable) {
 		[self setAutoresizingMask: [self autoresizingMask] & ~NSViewHeightSizable];
 		
@@ -144,6 +146,8 @@
 		newHeight = [[fieldEditor layoutManager] usedRectForTextContainer:
 			[fieldEditor textContainer]].size.height + IFVerticalPadding;
 	
+    //--if textfield's origin height not 22 then set minTextFieldHeight as origin height
+    newHeight = MAX(minTextFieldHeight, newHeight);
 	fieldGrowth = newHeight - oldHeight;   
 	
 	if (fieldGrowth != 0) {

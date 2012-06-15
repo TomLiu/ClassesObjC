@@ -72,6 +72,7 @@ enum { IFVerticalPadding = 5 };
 	NSMutableArray *viewMaskPairs; 
 }
 
+@property float minTextFieldHeight;
 - (void) awakeFromNib;
 - (void) setSuperviewsExpandOnGrowth: (BOOL)shouldExpand;
 - (BOOL) superviewsExpandOnGrowth;
